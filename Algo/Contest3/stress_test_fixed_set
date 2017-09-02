@@ -1,0 +1,40 @@
+void stressTest() {
+    int sz = 500;
+    int maxima = 500;
+    std::set<int> numbers;
+    for (int i = 0; i < sz; ++i) {
+        numbers.insert(rand() % maxima);
+    }
+    std::vector<int> set_numbers;
+    for (auto it = numbers.begin(); it != numbers.end(); ++it) {
+        set_numbers.push_back(*it);
+    }
+    std::random_shuffle(set_numbers.begin(), set_numbers.end());
+    // printVector(set_numbers);
+
+    FixedSet fixedSet;
+    fixedSet.initialize(set_numbers);
+
+    std::vector<int> queries;
+    for (int i = 0; i < sz; ++i) {
+        queries.push_back(rand() % maxima);
+    }
+
+    for (int i = 0; i < sz; ++i) {
+        if (fixedSet.contains(queries[i]) != numbers.count(queries[i])) {
+            std::cerr << "KURWAAAAAAAAAAA\n";
+            for (int i = 0; i < set_numbers.size(); ++i) {
+                std::cerr << set_numbers[i] << " ";
+            }
+            std::cerr << "\n";
+            for (int i = 0; i < queries.size(); ++i) {
+                std::cerr << queries[i] << " ";
+            }
+            std::cerr << "\n";
+            std::cerr << "wrong index is " << i << "\n";
+            return;
+        }
+    }
+    std::cerr << "OK\n";
+
+}

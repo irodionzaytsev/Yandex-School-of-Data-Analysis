@@ -1,0 +1,258 @@
+/*
+std::vector<int> hleb_solve(const std::vector<Request>& requests) {
+    std::vector<std::pair<int, int> >
+    for (const Request& request : requests) {
+        int left =request.left;
+        int right = request.right;
+        if (request.type == '+') {
+
+            result.push_back(sum);
+            tree.add(left, right, 1);
+        }
+        if (request.type == '-') {
+            int count = tree.sum(0, left, maximal_value, 0, right + 1);
+            if (count > 0) {
+                tree.add(left, right, -1);
+            }}
+    }
+    return result;
+}
+ */
+
+void StressTest() {
+
+    int sz = 50;
+    int requests = 500;
+    int mod = 200;
+
+    std::vector<std::vector<int>> grid(sz, std::vector<int> (sz, 0));
+    Tree2D tree(sz);
+
+    for (int request = 0; request < requests; ++request) {
+        int coord_x = rand() % sz;
+        int coord_y = rand() % sz;
+        int delta = 1;
+        // std::cerr << "coord_x = " << coord_x << ", coord_y = " << coord_y << ", delta = " << delta << "\n";
+        grid[coord_x][coord_y] += delta;
+        tree.add(coord_x, coord_y, delta);
+
+        for (int l_x = 0; l_x < sz; ++l_x) {
+            for (int r_x = l_x + 1; r_x < sz; ++r_x) {
+                for (int l_y = 0; l_y < sz; ++l_y) {
+                    for (int r_y = l_y + 1; r_y < sz; ++r_y) {
+
+                        int sum_brute = 0;
+                        for (int x = l_x; x < r_x; ++x) {
+                            for (int y = l_y; y < r_y; ++y) {
+                                sum_brute += grid[x][y];
+                            }
+                        }
+                        // std::cerr << "brute: " << sum_brute << "\n";
+
+                        // std::cerr << "new requesttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\n";
+
+                        int sum_clev = tree.sum(0, l_x, r_x, l_y, r_y);
+                        // std::cerr << "clev: " << sum_clev << "\n";
+                        if (sum_brute != sum_clev) {
+                            std::cerr << "KURWAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
+                            std::cerr << "ask sum on " << l_x << " " << r_x << " | " << l_y << " " << r_y << "\n";
+                            std::cerr << "brute = " << sum_brute << "\n";
+                            std::cerr << "clev = " << sum_clev << "\n";
+                            // int a = (3) / (sum_brute - sum_brute);
+                            std::terminate();
+                        }
+                    }
+                }
+            }
+        }
+        std::cerr << "OK\n";
+        /*
+        int l_x = rand() % sz;
+        int r_x = rand() % sz;
+        int l_y = rand() % sz;
+        int r_y = rand() % sz;
+        if (l_x > r_x) {
+            std::swap(l_x, r_x);
+        }
+        if (l_y > r_y) {
+            std::swap(l_y, r_y);
+        }
+        if (l_x == r_x || l_y == r_y) {
+            continue;
+        }*/
+    }
+}
+
+
+  if (vertice[vertex].ptrs[0][0] != -1) {
+            all_sum += sum(vertice[vertex].ptrs[0][0],
+                           left_x,
+                           std::min(current_x_mid, right_x),
+                           left_y,
+                           std::min(current_y_mid, right_y));
+        }
+
+        if (vertice[vertex].ptrs[0][1] != -1) {
+            all_sum += sum(vertice[vertex].ptrs[0][1],
+                           left_x,
+                           std::min(current_x_mid, right_x),
+                           std::max(current_y_mid, left_y),
+                           right_y);
+        }
+
+        if (vertice[vertex].ptrs[1][0] != -1) {
+            all_sum += sum(vertice[vertex].ptrs[1][0],
+                           std::max(current_x_mid, left_x),
+                           right_x,
+                           left_y,
+                           std::min(current_y_mid, right_y));
+        }
+
+        if (vertice[vertex].ptrs[1][1] != -1) {
+            all_sum += sum(vertice[vertex].ptrs[1][1],
+                           std::max(current_x_mid, left_x),
+                           right_x,
+                           std::max(current_y_mid, left_y),
+                           right_y);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+void generateTest(std::vector<Request>* requests) {
+    int sz = 100000;
+    int tests = 50000;
+    for (int i = 0; i < tests; ++i) {
+        int left = rand() % sz;
+        int right = rand() % sz;
+        if (left > right) {
+            std::swap(left, right);
+        }
+        requests->push_back(Request('+', left, right));
+    }
+    std::random_shuffle(requests->begin(), requests->end());
+}
+
+
+
+int main() {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::vector<Request> requests;
+    // readInput(&requests);
+    double avg = 0.0;
+    for (int tests = 0; tests < 5; ++tests) {
+        requests.clear();
+        generateTest(&requests);
+        time_t start = clock();
+        std::vector<int> result = solve(requests);
+        avg += (clock() - start) / 1.0 / CLOCKS_PER_SEC;
+        std::cout << (clock() - start) / 1.0 / CLOCKS_PER_SEC << "\n";
+        std::cout << result.size() << "\n";
+    }
+    std::cout << "avg = " << avg / 5 << "\n";
+    // writeOutput(result);
+}
+*/
+
+/*
+void StressTest() {
+
+    int sz = ;
+    int requests = 100;
+    int mod = 200;
+
+    std::vector<std::vector<int>> grid(sz, std::vector<int> (sz, 0));
+
+
+    std::vector<std::pair<int, int>> xy_keys;
+    for (int request = 0; request < requests; ++request) {
+        xy_keys.push_back(std::make_pair(rand() % sz, rand() % sz));
+        // std::cerr << "keys: " << xy_keys.back().first << " " << xy_keys.back().second << "\n";
+    }
+    std::sort(xy_keys.begin(), xy_keys.end());
+    // for (int request = 0; request < requests; ++request) {
+    //     std::cerr << "keys: " << xy_keys[request].first << " " << xy_keys[request].second << "\n";
+    // }
+    // std::cerr << "start\n";
+    SegmentFenwick tree(xy_keys);
+    // std::cerr << "finish\n";
+    std::random_shuffle(xy_keys.begin(), xy_keys.end());
+
+    for (int request = 0; request < requests; ++request) {
+        int coord_x = xy_keys[request].first;
+        int coord_y = xy_keys[request].second;
+        int delta = 1;
+        // std::cerr << "coord_x = " << coord_x << ", coord_y = " << coord_y << ", delta = " << delta << "\n";
+        grid[coord_x][coord_y] += delta;
+
+        tree.add(0, coord_x, coord_y, delta);
+
+        for (int l_x = 0; l_x < sz; ++l_x) {
+            for (int r_x = l_x + 1; r_x < sz; ++r_x) {
+                for (int l_y = 0; l_y < sz; ++l_y) {
+                    for (int r_y = l_y + 1; r_y < sz; ++r_y) {
+
+                        int sum_brute = 0;
+                        for (int x = l_x; x < r_x; ++x) {
+                            for (int y = l_y; y < r_y; ++y) {
+                                sum_brute += grid[x][y];
+                            }
+                        }
+                        // std::cerr << "brute: " << sum_brute << "\n";
+
+                        // std::cerr << "new requesttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\n";
+
+                        int sum_clev = tree.sum(0, l_x, r_x, l_y, r_y);
+                        // std::cerr << "clev: " << sum_clev << "\n";
+                        if (sum_brute != sum_clev) {
+                            std::cerr << "KURWAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
+                            std::cerr << "ask sum on " << l_x << " " << r_x << " | " << l_y << " " << r_y << "\n";
+                            std::cerr << "brute = " << sum_brute << "\n";
+                            std::cerr << "clev = " << sum_clev << "\n";
+                            // int a = (3) / (sum_brute - sum_brute);
+                            std::terminate();
+                        }
+                    }
+                }
+            }
+        }
+        std::cerr << "OK\n";
+
+    }
+}
+
+*/
