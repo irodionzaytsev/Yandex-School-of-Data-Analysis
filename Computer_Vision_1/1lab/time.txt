@@ -1,0 +1,17 @@
+1.43079710007 seconds for star
+0.279785871506 seconds for star
+1.0142519474 seconds for star
+4.67308306694 seconds for star
+1.32502293587 seconds for mse
+0.209660053253 seconds for mse
+0.800194978714 seconds for mse
+3.41172885895 seconds for mse
+1.31786704063 seconds for star
+0.264441013336 seconds for star
+1.02586889267 seconds for star
+4.55088710785 seconds for star
+1.32390403748 seconds for mse
+0.209839820862 seconds for mse
+0.793862104416 seconds for mse
+3.41071391106 seconds for mse
+27.8327240944 seconds
